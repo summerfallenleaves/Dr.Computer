@@ -1,0 +1,94 @@
+[project]
+name = "dr-computer"
+version = "0.1.0"
+description = "A Python framework for building Desktop AI Agents with pluggable perception, planning, grounding, and execution."
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "summerfallenleaves" }]
+requires-python = ">=3.11"
+keywords = ["computer-use", "ai-agent", "desktop-automation", "gui-agent", "framework"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: MacOS :: MacOS X",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "pydantic>=2.5,<3",
+    "httpx>=0.27,<1",
+    "openai>=1.50,<2",
+    "pillow>=10.0,<12",
+    "pyautogui>=0.9.54,<1",
+    "pyobjc-core>=10.0",
+    "pyobjc-framework-Quartz>=10.0",
+    "pyobjc-framework-ScreenCaptureKit>=10.0",
+    "python-dotenv>=1.0,<2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.6",
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "mypy>=1.10",
+]
+
+[project.urls]
+Homepage = "https://github.com/summerfallenleaves/Dr.Computer"
+Repository = "https://github.com/summerfallenleaves/Dr.Computer"
+Issues = "https://github.com/summerfallenleaves/Dr.Computer/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/dr_computer"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests", "examples"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+    "SIM", # flake8-simplify
+    "RUF", # ruff-specific
+]
+ignore = [
+    "E501",  # line too long (we use formatter)
+    "B008",  # function call in default argument (Pydantic patterns)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["B011"]  # assert False in tests is fine
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = [
+    "-ra",
+    "--strict-markers",
+    "--strict-config",
+]
+
+[tool.mypy]
+python_version = "3.11"
+strict = false
+warn_unused_ignores = true
+warn_redundant_casts = true
+ignore_missing_imports = true
+files = ["src/dr_computer"]
