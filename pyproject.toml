@@ -44,6 +44,9 @@ Homepage = "https://github.com/summerfallenleaves/Dr.Computer"
 Repository = "https://github.com/summerfallenleaves/Dr.Computer"
 Issues = "https://github.com/summerfallenleaves/Dr.Computer/issues"
 
+[project.scripts]
+dr-computer = "dr_computer.cli.main:main"
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
